@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public final class LoginManager {
     private static final Scanner input = new Scanner(System.in);
-    private static boolean menuActiveStatus = true;
+    private static boolean isLogManagerActive = true;
 
     // private constructor agar tidak dapat dibuat objek
     private LoginManager(){
@@ -29,19 +29,24 @@ public final class LoginManager {
         tanpa membuat objeknya dulu
      */
     public static void menu(Library library) {
-        while (menuActiveStatus) {
+        while (isLogManagerActive) {
             System.out.println("1. Login");
             System.out.println("2. Daftar");
-            System.out.print("Pilihan [1/2]: ");
+            System.out.println("3. Exit");
+            System.out.print("Masukkan Pilihan [1-3]: ");
+            // try catch untuk nangkap error jika user input selain integer
             try {
                 int userChoice = input.nextInt();
                 input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
                 switch (userChoice) {
                     case 1 -> login(library);
                     case 2 -> signup(library);
+                    case 3 -> {
+                        isLogManagerActive = false;
+                        System.out.println("\nKeluar program.");
+                    }
                     default -> System.out.println("Invalid Input! \n");
                 }
-                break; // biar loop nya berhenti, tpi klo gagal login nanti bakal tetep loop
             } catch (InputMismatchException e) {
                 System.out.println("Invalid Input! \n");
                 input.nextLine(); // meminta input lagi, jika sebelumnya invalid
@@ -61,9 +66,9 @@ public final class LoginManager {
         // validasi login
         for (Admin admin : library.getAdminList()) {
             if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+                isLogManagerActive = false;   // keluar dari loop pada method menu LoginManager
                 library.setLoggedAdmin(admin); // menetapkan admin yang login
-                library.adminMenu();
-                menuActiveStatus = false;   // keluar dari loop pada method menu LoginManager
+                library.adminMenu();    // masuk ke menu admin
                 loginSuccess = true;
                 break;
             } else if (!library.getMemberList().isEmpty()) { // jika user bukan admin dan memberListtidak kosong, maka cek memberList
@@ -71,9 +76,9 @@ public final class LoginManager {
                 for (LibraryMember member : library.getMemberList()) {
                     // mengecek username dan password
                     if (member.getUsername().equals(username) && member.getPassword().equals(password)) {
+                        isLogManagerActive = false;   // keluar dari loop pada method menu LoginManager
                         library.setLoggedMember(member); // menetapkan user yang login
-                        library.memberMenu();
-                        menuActiveStatus = false;   // keluar dari loop pada method menu LoginManager
+                        library.memberMenu();   // masuk ke menu member
                         loginSuccess = true;
                         break;
                     }
@@ -103,5 +108,17 @@ public final class LoginManager {
 
         System.out.println("Akun berhasil dibuat.");
         login(library);
+    }
+
+
+    /*
+        Getter Setter
+     */
+    public static boolean isLogManagerActive() {
+        return isLogManagerActive;
+    }
+
+    public static void setIsLogManagerActive(boolean isLogManagerActive) {
+        LoginManager.isLogManagerActive = isLogManagerActive;
     }
 }
