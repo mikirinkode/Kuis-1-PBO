@@ -13,7 +13,10 @@ public class Library {
     private final ArrayList<LibraryMember> memberList = new ArrayList<>();
     private final ArrayList<Admin> adminList = new ArrayList<>();
     private final String libraryName;
+    private Admin loggedInAdmin;
+    private LibraryMember loggedInMember;
     private boolean menuActiveStatus = true;
+
     // inisialisasi kelas scanner untuk Input User
     private Scanner input = new Scanner(System.in);
 
@@ -31,60 +34,75 @@ public class Library {
 
     public void adminMenu() {
         System.out.println("Anda berhasil login sebagai admin.");
-        System.out.println("Menu:");
-        System.out.println("1. Update Informasi Buku");
-        System.out.println("2. List Buku yang terdaftar");
-        System.out.println("3. Tambah Admin");
-        System.out.println("4. logout");
-        System.out.print("Pilihan [1-4]: ");
-
         while (menuActiveStatus) {
+            System.out.println("\nMenu Admin:");
+            System.out.println("1. Tambah Buku");
+            System.out.println("2. Menampilkan Daftar Buku");
+            System.out.println("3. LOGOUT");
+            System.out.print("Pilihan [1-3]: ");
             try {
                 int userChoice = input.nextInt();
                 input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
                 switch (userChoice) {
-                    case 1 -> updateBookDetail();
+                    case 1 -> addNewBook();
                     case 2 -> displayBookList();
-                    case 3 -> addNewAdmin();
-                    case 4 -> logout();
+                    case 3 -> logout();
                     default -> System.out.println("Invalid Input!");
                 }
-                break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid Input! \n");
-                System.out.println("1. Update Informasi Buku");
-                System.out.println("2. Daftar Buku");
-                System.out.println("3. Tambah Admin");
-                System.out.println("4. logout");
-                System.out.print("Pilihan [1-4]: ");
                 input.nextLine();
             }
         } // akhir while loop
     }
 
-    private void updateBookDetail() {
+    // method admin untuk tambah buku baru
+    private void addNewBook() {
+        loggedInAdmin.addNewBook(getLibraryBooks());
     }
 
+    // method nampilin seluruh buku yang ada
     private void displayBookList() {
+        System.out.println("\n=======================");
         System.out.println("Menampilkan Daftar Buku");
+        System.out.println("=======================");
+        for (Book book : getLibraryBooks()) {
+            System.out.println();
+            book.printBookDetail();
+        }
     }
 
-
-    private void addNewAdmin() {
-    }
 
     public void memberMenu() {
         System.out.println("Anda berhasil login sebagai member.");
     }
 
+
     void logout() {
         input.close();
         menuActiveStatus = false;
+        System.out.println("\nBerhasil logout.");
     }
-    
+
     /*
         Getter Setter
      */
+    public Admin getLoggedAdmin() {
+        return loggedInAdmin;
+    }
+
+    public void setLoggedAdmin(Admin loggedInAdmin) {
+        this.loggedInAdmin = loggedInAdmin;
+    }
+
+    public LibraryMember getLoggedMember() {
+        return loggedInMember;
+    }
+
+    public void setLoggedMember(LibraryMember loggedInMember) {
+        this.loggedInMember = loggedInMember;
+    }
+
     public ArrayList<Book> getLibraryBooks() {
         return libraryBooks;
     }
