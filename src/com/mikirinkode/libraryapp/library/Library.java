@@ -15,7 +15,7 @@ public class Library {
     private final String libraryName;
     private Admin loggedInAdmin;
     private LibraryMember loggedInMember;
-    private boolean menuActiveStatus = true;
+    private boolean isMenuActive = true;
 
     // inisialisasi kelas scanner untuk Input User
     private Scanner input = new Scanner(System.in);
@@ -31,15 +31,15 @@ public class Library {
         System.out.println("====================================");
     }
 
-
     public void adminMenu() {
         System.out.println("Anda berhasil login sebagai admin.");
-        while (menuActiveStatus) {
+        isMenuActive = true;
+        while (isMenuActive) {
             System.out.println("\nMenu Admin:");
             System.out.println("1. Tambah Buku");
-            System.out.println("2. Menampilkan Daftar Buku");
+            System.out.println("2. Tampilkan Daftar Buku");
             System.out.println("3. LOGOUT");
-            System.out.print("Pilihan [1-3]: ");
+            System.out.print("Masukkan Pilihan [1-3]: ");
             try {
                 int userChoice = input.nextInt();
                 input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
@@ -54,11 +54,15 @@ public class Library {
                 input.nextLine();
             }
         } // akhir while loop
-    }
+    } // akhir method
 
-    // method admin untuk tambah buku baru
+    /*
+        method admin untuk menambahkan buku baru
+        memanggil fungsi bawaan kelas admin yaitu addNewBook()
+        dengan argumen list book -> getLibraryBook()
+     */
     private void addNewBook() {
-        loggedInAdmin.addNewBook(getLibraryBooks());
+        getLoggedAdmin().addNewBook(getLibraryBooks());
     }
 
     // method nampilin seluruh buku yang ada
@@ -72,17 +76,62 @@ public class Library {
         }
     }
 
-
     public void memberMenu() {
-        System.out.println("Anda berhasil login sebagai member.");
+        System.out.println("Anda berhasil login.");
+        isMenuActive = true;
+        while (isMenuActive) {
+            System.out.println("\nMenu Member:");
+            System.out.println("1. Tampilkan Daftar Buku");
+            System.out.println("2. Menu Pinjam Buku");
+            System.out.println("3. Kembalikan Buku");
+            System.out.println("4. Riwayat Peminjaman");
+            System.out.println("5. LOGOUT");
+            System.out.print("Masukkan Pilihan [1-5]: ");
+            try {
+                int userChoice = input.nextInt();
+                input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
+                switch (userChoice) {
+                    case 1 -> displayBookList();
+                    case 2 -> bookBorrowing();
+                    case 3 -> bookReturning();
+                    case 4 -> displayUserBorrowingHistory();
+                    case 5 -> logout();
+                    default -> System.out.println("Invalid Input!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input! \n");
+                input.nextLine();
+            }
+        } // akhir while loop
+    } // akhir method
+
+    /*
+        method untuk member meminjam buku
+        memanggil fungsi bawaan kelas LibraryMember yaitu borrowOneBook()
+        dengan argumen list book -> getLibraryBook()
+     */
+    private void bookBorrowing() {
+        getLoggedMember().borrowOneBook(getLibraryBooks());
     }
 
+    // method untuk member mengembalikan
+    private void bookReturning() {
+        getLoggedMember().returnBook();
+    }
+
+    // method untuk menampilkan riwayat peminjaman buku
+    private void displayUserBorrowingHistory() {
+        getLoggedMember().displayBorrowingHistory();
+    }
 
     void logout() {
-        input.close();
-        menuActiveStatus = false;
+        setLoggedMember(null); // set ke null
+        setLoggedAdmin(null); // set ke null
+        LoginManager.setIsLogManagerActive(true); // mengaktifkan menu pada kelas LoginManager
         System.out.println("\nBerhasil logout.");
+        isMenuActive = false;
     }
+
 
     /*
         Getter Setter
