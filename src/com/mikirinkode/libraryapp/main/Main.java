@@ -1,11 +1,14 @@
+/*
+ * Copyright (c) 2022. Muhammad Wafa
+ */
+
 package com.mikirinkode.libraryapp.main;
 
-import com.mikirinkode.libraryapp.user.Admin;
+import com.mikirinkode.libraryapp.library.Library;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        System.out.println("hello there");
+        Library perpustakaan = new Library();
     }
 }

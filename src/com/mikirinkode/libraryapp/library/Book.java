@@ -1,23 +1,33 @@
 package com.mikirinkode.libraryapp.library;
 
 public class Book {
-    private String bookId;
+    private final String bookId;
     private String bookTitle;
-    private String category;
+    private String bookCategory;
     private String authorName;
-    private String releaseDate;
+    private int releaseDate;
+    private int idCounter = 0;
 
-
-    public Book(String bookTitle, String category, String authorName, String releaseDate) {
+    public Book(String bookTitle, String bookCategory, String authorName, int releaseDate) {
         this.bookTitle = bookTitle;
-        this.category = category;
+        this.bookCategory = bookCategory;
+        this.authorName = authorName;
+        this.releaseDate = releaseDate;
+        this.bookId = "0" + idCounter;
+        this.idCounter++;
+    }
+
+    public void updateDetail(String bookTitle, String bookCategory, String authorName, int releaseDate){
+        this.bookTitle = bookTitle;
+        this.bookCategory = bookCategory;
         this.authorName = authorName;
         this.releaseDate = releaseDate;
     }
 
     void printBookDetail() {
+        System.out.println("ID Buku \t: " + bookId);
         System.out.println("Nama Buku \t: " + bookTitle);
-        System.out.println("Kategori Buku \t: " + category);
+        System.out.println("Kategori Buku \t: " + bookCategory);
         System.out.println("Nama Penulis \t: " + authorName);
         System.out.println("Tanggal Rilis \t: " + releaseDate);
     }
@@ -30,11 +40,11 @@ public class Book {
         this.bookTitle = bookTitle;
     }
 
-    public String getReleaseDate() {
+    public int getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(int releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -46,11 +56,11 @@ public class Book {
         this.authorName = authorName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getbookCategory() {
+        return bookCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setbookCategory(String bookCategory) {
+        this.bookCategory = bookCategory;
     }
 }
