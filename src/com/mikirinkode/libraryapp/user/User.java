@@ -6,7 +6,7 @@ class User {
     private String username;
     private String password;
     private String userType;
-    private int idCounter = 0;  // untuk pembuatan ID
+    private static long idCounter = 0;  // untuk pembuatan ID
 
     User(String fullName, String username, String password, String userType) {
         this.fullName = fullName;
@@ -25,9 +25,18 @@ class User {
         System.out.println("Username: " + username);
     }
 
+    private static String createId() {
+        return String.valueOf(idCounter++);
+    }
+
     /*
         Getter Setter
     */
+
+    public String getUserId() {
+        return userId;
+    }
+
     String getFullName() {
         return this.fullName;
     }
@@ -50,5 +59,13 @@ class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }
