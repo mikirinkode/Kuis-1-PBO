@@ -29,7 +29,8 @@ public final class LoginManager {
         tanpa membuat objeknya dulu
      */
     public static void menu(Library library) {
-        while (isLogManagerActive) {
+        setIsLogManagerActive(true);
+        while (isLogManagerActive()) {
             System.out.println("1. Login");
             System.out.println("2. Daftar");
             System.out.println("3. Exit");
@@ -42,7 +43,7 @@ public final class LoginManager {
                     case 1 -> login(library);
                     case 2 -> signup(library);
                     case 3 -> {
-                        isLogManagerActive = false;
+                        setIsLogManagerActive(false);
                         System.out.println("\nKeluar program.");
                     }
                     default -> System.out.println("Invalid Input! \n");
@@ -66,7 +67,7 @@ public final class LoginManager {
         // validasi login
         for (Admin admin : library.getAdminList()) {
             if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
-                isLogManagerActive = false;   // keluar dari loop pada method menu LoginManager
+                setIsLogManagerActive(false);   // keluar dari loop pada method menu LoginManager
                 library.setLoggedAdmin(admin); // menetapkan admin yang login
                 library.adminMenu();    // masuk ke menu admin
                 loginSuccess = true;
@@ -76,7 +77,7 @@ public final class LoginManager {
                 for (LibraryMember member : library.getMemberList()) {
                     // mengecek username dan password
                     if (member.getUsername().equals(username) && member.getPassword().equals(password)) {
-                        isLogManagerActive = false;   // keluar dari loop pada method menu LoginManager
+                        setIsLogManagerActive(false);   // keluar dari loop pada method menu LoginManager
                         library.setLoggedMember(member); // menetapkan user yang login
                         library.memberMenu();   // masuk ke menu member
                         loginSuccess = true;
