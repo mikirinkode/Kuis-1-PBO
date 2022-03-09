@@ -15,32 +15,37 @@ public class DummyData {
                 "Keluh Kesah Programmer",
                 "Motivasi",
                 "Muhammad Wafa",
-                2099));
+                2083));
         bookList.add(new Book(
                 "Programmer adalah Makhluk Malam",
                 "Fiksi",
                 "Muhammad Wafa",
-                2077));
+                2082));
         bookList.add(new Book(
-                "Ketika Ngoding pusing? mata panas, punggung sakit? - Bagaimana Menjadi Programmer Sehat",
+                "Pusing Ketika Ngoding ? mata panas, punggung sakit? - Bagaimana Menjadi Programmer Sehat",
                 "Kesehatan Programmer",
                 "Muhammad Wafa",
-                2077));
+                2081));
         bookList.add(new Book(
                 "10 Tips Jitu Ngoding 24 Jam Non-Stop!",
                 "Tips & Trik",
                 "Muhammad Wafa",
-                2055));
+                2080));
         bookList.add(new Book(
                 "Memahami Konsep OOP",
                 "Panduan",
                 "Muhammad Wafa",
-                2045));
+                2079));
         bookList.add(new Book(
                 "Dasar Dasar Pemrograman - Semua Bahasa Pemrograman itu konsepnya sama",
                 "Dasar Dasar Pemrograman",
                 "Muhammad Wafa",
-                2045));
+                2078));
+        bookList.add(new Book(
+                "Hello World! - Memulai pemrograman dengan Java",
+                "Panduan",
+                "Muhammad Wafa",
+                2077));
 
         return bookList;
     }
