@@ -9,29 +9,41 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Library {
-    private final ArrayList<Book> libraryBooks = DummyData.generateBookList();
+    // attribute
+    private final ArrayList<Book> libraryBooks = DummyData.generateBookList();  // mengisi data dari kelas DummyData
     private final ArrayList<LibraryMember> memberList = new ArrayList<>();
     private final ArrayList<Admin> adminList = new ArrayList<>();
     private final ArrayList<Transaction> transactionList = new ArrayList<>();
     private final String libraryName;
-    private Admin loggedInAdmin;
-    private LibraryMember loggedInMember;
-    private boolean isMenuActive = true;
+    private Admin loggedInAdmin;    //  untuk menampung admin yang sedang login ke sistem
+    private LibraryMember loggedInMember;   // untuk menampung member yang sedang login ke sistem
+    private boolean isMenuActive = true;    // untuk perulangan menu
 
     // inisialisasi kelas scanner untuk Input User
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
+    /*
+        constructor
+     */
     public Library(String libraryName) {
+        this.libraryName = libraryName;
+        init();
+    }
+
+    // inisialisasi ketika objek dibuat sekaligus menampilkan sapaan selamat datang
+    private void init(){
         // inisialisasi sample member dan admin perpustakaan
         memberList.add(new LibraryMember("Muhammad Wafa", "wafa01", "mikirinkode"));
         adminList.add(new Admin("Admin Perpus", "adminPerpus", "adminPerpus1234"));
-        this.libraryName = libraryName;
 
         System.out.println("====================================");
         System.out.println("Selamat Datang di " + getLibraryName());
         System.out.println("====================================");
     }
 
+    /*
+        Method
+     */
     // method adminMenu() akan di akses melalui class Login Manager, jika user login sebagai admin
     public void adminMenu() {
         System.out.println("Anda berhasil login sebagai admin.");
@@ -39,35 +51,43 @@ public class Library {
         while (isMenuActive) {
             System.out.println("\nMenu Admin:");
             System.out.println("1. Tambah Buku");
-            System.out.println("2. Tampilkan Daftar Buku");
-            System.out.println("3. Tampilkan Daftar Transaksi");
-            System.out.println("4. LOGOUT");
-            System.out.print("Masukkan Pilihan [1-4]: ");
+            System.out.println("2. Update Informasi Buku");
+            System.out.println("3. Tampilkan Daftar Buku");
+            System.out.println("4. Tampilkan Daftar Transaksi");
+            System.out.println("5. LOGOUT");
+            System.out.print("Masukkan Pilihan [1-5]: ");
+            // try catch untuk berjaga jaga jika user meng-input selain integer
             try {
                 int userChoice = input.nextInt();
                 input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
                 switch (userChoice) {
                     case 1 -> addNewBook();
-                    case 2 -> displayBookList();
-                    case 3 -> displayTransactionList();
-                    case 4 -> logout();
+                    case 2 -> updateBookData();
+                    case 3 -> displayBookList();
+                    case 4 -> displayTransactionList();
+                    case 5 -> logout();
                     default -> System.out.println("Invalid Input!");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {    // menangkap kesalahan input
                 System.out.println("Invalid Input! \n");
-                input.nextLine();
+                input.nextLine();   // meminta input kembali
             }
         } // akhir while loop
     } // akhir method
 
 
+
     /*
         method admin untuk menambahkan buku baru
         memanggil fungsi bawaan kelas admin yaitu addNewBook()
-        dengan argumen list book -> getLibraryBook()
+        dengan argumen list book yaitu getLibraryBook()
      */
     private void addNewBook() {
         getLoggedAdmin().addNewBook(getLibraryBooks());
+    }
+
+    private void updateBookData() {
+        getLoggedAdmin().updateBookProperties(getLibraryBooks());
     }
 
     private void displayTransactionList() {
@@ -77,6 +97,7 @@ public class Library {
         if (getTransactionList().isEmpty()) {
             System.out.println("Belum ada Transaksi.");
         } else {
+            // menampilkan item pada ArrayList dengan forEach dan Lambda Expression
             getTransactionList().forEach(transaction -> {
                 transaction.printTransactionDetail();
                 System.out.println();
@@ -95,8 +116,9 @@ public class Library {
         }
     }
 
-
-    // method memberMenu() akan di akses melalui class Login Manager, jika user login sebagai member
+    /*
+        method memberMenu() akan di akses melalui class Login Manager, jika user login sebagai member
+     */
     public void memberMenu() {
         System.out.println("Anda berhasil login.");
         isMenuActive = true;
@@ -142,7 +164,8 @@ public class Library {
             transactionList.add(new Transaction(
                     getLoggedMember(),
                     "Peminjaman Buku",
-                    getLoggedMember().getCurrentBorrowedBook()));
+                    getLoggedMember().getCurrentBorrowedBook())
+            );
         }
     }
 
@@ -159,7 +182,8 @@ public class Library {
             transactionList.add(new Transaction(
                     getLoggedMember(),
                     "Pengembalian Buku",
-                    memberBorrowedBook));
+                    memberBorrowedBook)
+            );
         }
     }
 
@@ -173,9 +197,8 @@ public class Library {
         setLoggedAdmin(null); // set ke null
         LoginManager.setIsLogManagerActive(true); // mengaktifkan menu pada kelas LoginManager
         System.out.println("\nBerhasil logout.");
-        isMenuActive = false;
+        isMenuActive = false;   // agar looping menu pada kelas Library berhenti
     }
-
 
     /*
         Getter Setter
