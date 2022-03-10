@@ -92,7 +92,7 @@ public class LibraryMember extends User {
                 // jika id yang diinputkan user == id buku
                 if (userChoice.equals(book.getBookId())) {
                     System.out.println("Anda ingin meminjam buku:");
-                    System.out.println(book.getBookTitle());
+                    System.out.println("\""+ book.getBookTitle() + "\"");
                     System.out.print("Konfimasi [Y/N]: ");
                     String userInput = input.nextLine();
                     if (userInput.equals("Y") || userInput.equals("y")) {
@@ -102,6 +102,8 @@ public class LibraryMember extends User {
                         System.out.println("Batas waktu pengembalian adalah maks 30 hari setelah peminjaman.");
                         System.out.println("Terima kasih & Selamat Membaca.");
                         menuActiveStatus = false;
+                    } else if (userInput.equals("N") || userInput.equals("n")){
+                        System.out.println("Kembali ke menu sebelumnya.");
                     }
                 }
             });
@@ -114,21 +116,29 @@ public class LibraryMember extends User {
     }
 
 
-    public void returnBook() {
-        if (currentBorrowedBook == null) {
+    public Book returnBook() {
+        Book borrowedBook = getCurrentBorrowedBook();
+        if (borrowedBook == null) {
             System.out.println("\nAnda sedang tidak meminjam buku, yuk pinjam buku.");
         } else {
             System.out.println("Anda ingin mengembalikan buku:");
-            System.out.println(currentBorrowedBook.getBookTitle());
+            System.out.println(borrowedBook.getBookTitle());
             System.out.print("Konfimasi [Y/N]: ");
             String userInput = input.nextLine();
 
             if (userInput.equals("Y") || userInput.equals("y")) {
-                currentBorrowedBook = null;
+                setCurrentBorrowedBook(null);
                 System.out.println("Buku berhasil dikembalikan.");
                 System.out.println("Sekarang anda dapat meminjam buku lagi.");
+                return borrowedBook;
+
+            } else if (userInput.equals("N") || userInput.equals("n")){
+                System.out.println("Pengembalian dibatalkan");
+            } else {
+                System.out.println("Invalid Input!");
             }
         }
+        return null;
     }
 
 
@@ -149,5 +159,13 @@ public class LibraryMember extends User {
      */
     public ArrayList<Book> getBorrowingHistory() {
         return borrowingHistory;
+    }
+
+    public Book getCurrentBorrowedBook() {
+        return currentBorrowedBook;
+    }
+
+    public void setCurrentBorrowedBook(Book currentBorrowedBook) {
+        this.currentBorrowedBook = currentBorrowedBook;
     }
 }

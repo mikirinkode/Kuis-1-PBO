@@ -12,6 +12,7 @@ public class Library {
     private final ArrayList<Book> libraryBooks = DummyData.generateBookList();
     private final ArrayList<LibraryMember> memberList = new ArrayList<>();
     private final ArrayList<Admin> adminList = new ArrayList<>();
+    private final ArrayList<Transaction> transactionList = new ArrayList<>();
     private final String libraryName;
     private Admin loggedInAdmin;
     private LibraryMember loggedInMember;
@@ -22,7 +23,7 @@ public class Library {
 
     public Library(String libraryName) {
         // inisialisasi sample member dan admin perpustakaan
-        memberList.add(new LibraryMember("Muhammad Wafa", "wafa01", "12345678"));
+        memberList.add(new LibraryMember("Muhammad Wafa", "wafa01", "mikirinkode"));
         adminList.add(new Admin("Admin Perpus", "adminPerpus", "adminPerpus1234"));
         this.libraryName = libraryName;
 
@@ -31,6 +32,7 @@ public class Library {
         System.out.println("====================================");
     }
 
+    // method adminMenu() akan di akses melalui class Login Manager, jika user login sebagai admin
     public void adminMenu() {
         System.out.println("Anda berhasil login sebagai admin.");
         isMenuActive = true;
@@ -38,15 +40,17 @@ public class Library {
             System.out.println("\nMenu Admin:");
             System.out.println("1. Tambah Buku");
             System.out.println("2. Tampilkan Daftar Buku");
-            System.out.println("3. LOGOUT");
-            System.out.print("Masukkan Pilihan [1-3]: ");
+            System.out.println("3. Tampilkan Daftar Transaksi");
+            System.out.println("4. LOGOUT");
+            System.out.print("Masukkan Pilihan [1-4]: ");
             try {
                 int userChoice = input.nextInt();
                 input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
                 switch (userChoice) {
                     case 1 -> addNewBook();
                     case 2 -> displayBookList();
-                    case 3 -> logout();
+                    case 3 -> displayTransactionList();
+                    case 4 -> logout();
                     default -> System.out.println("Invalid Input!");
                 }
             } catch (InputMismatchException e) {
@@ -56,6 +60,7 @@ public class Library {
         } // akhir while loop
     } // akhir method
 
+
     /*
         method admin untuk menambahkan buku baru
         memanggil fungsi bawaan kelas admin yaitu addNewBook()
@@ -63,6 +68,20 @@ public class Library {
      */
     private void addNewBook() {
         getLoggedAdmin().addNewBook(getLibraryBooks());
+    }
+
+    private void displayTransactionList() {
+        System.out.println("\n===========================");
+        System.out.println("Menampilkan Daftar Transaksi");
+        System.out.println("============================");
+        if (getTransactionList().isEmpty()) {
+            System.out.println("Belum ada Transaksi.");
+        } else {
+            getTransactionList().forEach(transaction -> {
+                transaction.printTransactionDetail();
+                System.out.println();
+            });
+        }
     }
 
     // method nampilin seluruh buku yang ada
@@ -76,6 +95,8 @@ public class Library {
         }
     }
 
+
+    // method memberMenu() akan di akses melalui class Login Manager, jika user login sebagai member
     public void memberMenu() {
         System.out.println("Anda berhasil login.");
         isMenuActive = true;
@@ -112,11 +133,34 @@ public class Library {
      */
     private void bookBorrowing() {
         getLoggedMember().borrowOneBook(getLibraryBooks());
+        /*
+            menambahkan transaksi dengan argumen: MemberLibrary, Aktivitas, Book
+            jika != null, maka member meminjam buku dan sistem akan menambahkan transaksi baru
+            jika == null, maka member tidak meminjam buku dan tidak perlu membuat transaksi baru
+         */
+        if (getLoggedMember().getCurrentBorrowedBook() != null) {
+            transactionList.add(new Transaction(
+                    getLoggedMember(),
+                    "Peminjaman Buku",
+                    getLoggedMember().getCurrentBorrowedBook()));
+        }
     }
 
     // method untuk member mengembalikan
     private void bookReturning() {
-        getLoggedMember().returnBook();
+        /*
+            memanggil fungsi bawaan kelas Library Member yaitu returnBook
+            fungsi tersebut akan mengembalikan nilai null atau nilai kelas Book
+         */
+        Book memberBorrowedBook = getLoggedMember().returnBook();
+
+        // jika buku yang dipinjam == null, berarti tidak ada buku yang dikembalikan
+        if (memberBorrowedBook != null) {
+            transactionList.add(new Transaction(
+                    getLoggedMember(),
+                    "Pengembalian Buku",
+                    memberBorrowedBook));
+        }
     }
 
     // method untuk menampilkan riwayat peminjaman buku
@@ -166,6 +210,10 @@ public class Library {
 
     public String getLibraryName() {
         return libraryName;
+    }
+
+    public ArrayList<Transaction> getTransactionList() {
+        return transactionList;
     }
 }
 
