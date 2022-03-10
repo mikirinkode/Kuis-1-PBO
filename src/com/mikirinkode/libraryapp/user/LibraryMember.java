@@ -11,6 +11,8 @@ public class LibraryMember extends User {
     private final ArrayList<Book> borrowingHistory = new ArrayList<Book>();
     private Book currentBorrowedBook = null;
     private boolean menuActiveStatus = true;
+    // atribut untuk pengecekan ketika peminjaman, agar tidak terjadi transaksi yang duplikasi
+    private boolean isAbleToBorrow = true;
     // inisialisasi kelas scanner untuk Input User
     private Scanner input = new Scanner(System.in);
 
@@ -21,7 +23,7 @@ public class LibraryMember extends User {
 
     public void borrowOneBook(ArrayList<Book> bookList) {
         // User dapat meminjam buku, jika tidak ada buku yang ia pinjam
-        if (currentBorrowedBook == null) {
+        if (isAbleToBorrow()) {
             menuActiveStatus = true; // agar dapat mengakses menu
             while (menuActiveStatus) {
                 System.out.println("\n=== Menu Peminjaman Buku ===");
@@ -157,6 +159,14 @@ public class LibraryMember extends User {
     /*
         Getter Setter
      */
+    public boolean isAbleToBorrow() {
+        return isAbleToBorrow;
+    }
+
+    public void setAbleToBorrow(boolean ableToBorrow) {
+        isAbleToBorrow = ableToBorrow;
+    }
+
     public ArrayList<Book> getBorrowingHistory() {
         return borrowingHistory;
     }
