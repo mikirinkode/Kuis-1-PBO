@@ -7,7 +7,6 @@ package com.mikirinkode.libraryapp.library;
 import com.mikirinkode.libraryapp.user.Admin;
 import com.mikirinkode.libraryapp.user.LibraryMember;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
@@ -33,22 +32,15 @@ public final class LoginManager {
             System.out.println("2. Daftar");
             System.out.println("3. Exit");
             System.out.print("Masukkan Pilihan [1-3]: ");
-            // try catch untuk nangkap error jika user input selain integer
-            try {
-                int userChoice = input.nextInt();
-                input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
-                switch (userChoice) {
-                    case 1 -> login(library);
-                    case 2 -> signup(library);
-                    case 3 -> {
-                        setIsLogManagerActive(false);
-                        System.out.println("\nKeluar program.");
-                    }
-                    default -> System.out.println("Invalid Input! \n");
+            String userChoice = input.nextLine();
+            switch (userChoice) {
+                case "1" -> login(library);
+                case "2" -> signup(library);
+                case "3" -> {
+                    setIsLogManagerActive(false);
+                    System.out.println("\nKeluar program.");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input! \n");
-                input.nextLine(); // meminta input lagi, jika sebelumnya invalid
+                default -> System.out.println("Invalid Input! \n");
             }
         } // akhir while loop
     } // akhir function

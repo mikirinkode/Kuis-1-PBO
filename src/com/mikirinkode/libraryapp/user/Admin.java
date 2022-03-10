@@ -62,19 +62,12 @@ public class Admin extends User {
             System.out.println("2. Tampilkan buku berdasarkan Abjad");
             System.out.println("3. Batal dan kembali");
             System.out.print("Masukkan Pilihan [1-3]: ");
-            // try catch untuk mengatasi jika user salah input
-            try {
-                int userChoice = input.nextInt();
-                input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
-                switch (userChoice) {
-                    case 1 -> displayAllBooks(bookList);
-                    case 2 -> showByAlphabet(bookList);
-                    case 3 -> menuActiveStatus = false;
-                    default -> System.out.println("Invalid Input!");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input! \n");
-                input.nextLine(); // untuk meminta input kembali
+            String userChoice = input.nextLine();
+            switch (userChoice) {
+                case "1" -> displayAllBooks(bookList);
+                case "2" -> showByAlphabet(bookList);
+                case "3" -> menuActiveStatus = false;
+                default -> System.out.println("Invalid Input!");
             }
         }
     }

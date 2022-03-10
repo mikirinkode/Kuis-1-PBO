@@ -5,7 +5,6 @@ import com.mikirinkode.libraryapp.user.Admin;
 import com.mikirinkode.libraryapp.user.LibraryMember;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Library {
@@ -33,7 +32,7 @@ public class Library {
     // inisialisasi ketika objek dibuat sekaligus menampilkan sapaan selamat datang
     private void init(){
         // inisialisasi sample member dan admin perpustakaan
-        memberList.add(new LibraryMember("Muhammad Wafa", "wafa01", "mikirinkode"));
+        memberList.add(new LibraryMember("Muhammad Wafa", "wafa01", "12345678"));
         adminList.add(new Admin("Admin Perpustakaan", "admin", "admin1234"));
 
         System.out.println("====================================");
@@ -57,21 +56,14 @@ public class Library {
             System.out.println("4. Tampilkan Daftar Transaksi");
             System.out.println("5. LOGOUT");
             System.out.print("Masukkan Pilihan [1-5]: ");
-            // try catch untuk berjaga jaga jika user meng-input selain integer
-            try {
-                int userChoice = input.nextInt();
-                input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
-                switch (userChoice) {
-                    case 1 -> addNewBook();
-                    case 2 -> updateBookData();
-                    case 3 -> displayBookList();
-                    case 4 -> displayTransactionList();
-                    case 5 -> logout();
-                    default -> System.out.println("Invalid Input!");
-                }
-            } catch (InputMismatchException e) {    // menangkap kesalahan input
-                System.out.println("Invalid Input! \n");
-                input.nextLine();   // meminta input kembali
+            String userChoice = input.nextLine();
+            switch (userChoice) {
+                case "1" -> addNewBook();
+                case "2" -> updateBookData();
+                case "3" -> displayBookList();
+                case "4" -> displayTransactionList();
+                case "5" -> logout();
+                default -> System.out.println("Invalid Input!");
             }
         } // akhir while loop
     } // akhir method
@@ -132,20 +124,14 @@ public class Library {
             System.out.println("4. Riwayat Peminjaman");
             System.out.println("5. LOGOUT");
             System.out.print("Masukkan Pilihan [1-5]: ");
-            try {
-                int userChoice = input.nextInt();
-                input.nextLine();  // untuk ambil input hingga akhir baris pada nextInt sebelumnya
-                switch (userChoice) {
-                    case 1 -> displayBookList();
-                    case 2 -> bookBorrowing();
-                    case 3 -> bookReturning();
-                    case 4 -> displayUserBorrowingHistory();
-                    case 5 -> logout();
-                    default -> System.out.println("Invalid Input!");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input! \n");
-                input.nextLine();
+            String userChoice = input.nextLine();
+            switch (userChoice) {
+                case "1" -> displayBookList();
+                case "2" -> bookBorrowing();
+                case "3" -> bookReturning();
+                case "4" -> displayUserBorrowingHistory();
+                case "5" -> logout();
+                default -> System.out.println("Invalid Input!");
             }
         } // akhir while loop
     } // akhir method
