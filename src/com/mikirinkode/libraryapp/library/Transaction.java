@@ -53,6 +53,7 @@ public class Transaction {
         System.out.println("Oleh: " + getMember().getFullName());
         System.out.println("Buku: " + getBook().getBookTitle());
     }
+
     /*
         Getter Setter
      */

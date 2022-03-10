@@ -2,6 +2,7 @@ package com.mikirinkode.libraryapp.library;
 
 
 public class Book {
+    // atribut
     private static long idCounter = 1;
     private final String bookId;
     private String bookTitle;
@@ -9,6 +10,7 @@ public class Book {
     private String authorName;
     private int releaseDate;
 
+    // constructor
     public Book(String bookTitle, String bookCategory, String authorName, int releaseDate) {
         this.bookTitle = bookTitle;
         this.bookCategory = bookCategory;
@@ -17,6 +19,7 @@ public class Book {
         this.bookId = "0" + createId();
     }
 
+    // method
     private static String createId() {
         return String.valueOf(idCounter++);
     }
@@ -28,7 +31,7 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    void printBookDetail() {
+    public void printBookDetail() {
         System.out.println("ID \t\t\t: " + getBookId());
         System.out.println("Judul \t\t: " + getBookTitle());
         System.out.println("Kategori \t: " + getBookCategory());
@@ -75,5 +78,4 @@ public class Book {
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
-
 }

@@ -6,11 +6,16 @@ import java.util.ArrayList;
 /**
  *  Kelas ini berguna untuk menghasilkan data dummy Buku untuk sistem Perpustakaan
  */
-public class DummyData {
+public final class DummyData {
 
+    /*
+        method static agar dapat di akses tanpa harus membuat objeknya terlebih dahulu
+     */
     public static ArrayList<Book> generateBookList() {
-        ArrayList<Book> bookList = new ArrayList<Book>();
+        // menampung data dalam array list
+        ArrayList<Book> bookList = new ArrayList<>();
 
+        // membuat objek buku baru sekaligus menambahkannya ke list buku
         bookList.add(new Book(
                 "Keluh Kesah Programmer",
                 "Motivasi",

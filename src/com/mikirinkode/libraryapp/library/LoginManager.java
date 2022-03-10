@@ -20,9 +20,7 @@ public final class LoginManager {
     private static boolean isLogManagerActive = true;
 
     // private constructor agar tidak dapat dibuat objek
-    private LoginManager(){
-
-    }
+    private LoginManager(){ }
 
     /*
         Method static agar dapat diakses langsung dari luar

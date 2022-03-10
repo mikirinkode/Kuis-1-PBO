@@ -18,13 +18,6 @@ class User {
         this.userId = createId();
     }
 
-    void printUserDetail() {
-        System.out.println("User ID: " + getUserId());
-        System.out.println("Full Name: " + getFullName());
-        System.out.println("Username: " + getUsername());
-        System.out.println("Tipe: " + getUserType());
-    }
-
     private static String createId() {
         return "UID00" + idCounter++;
     }

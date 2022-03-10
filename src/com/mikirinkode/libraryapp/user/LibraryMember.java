@@ -22,7 +22,7 @@ public class LibraryMember extends User {
     public void borrowOneBook(ArrayList<Book> bookList) {
         // User dapat meminjam buku, jika tidak ada buku yang ia pinjam
         if (currentBorrowedBook == null) {
-            menuActiveStatus = true;
+            menuActiveStatus = true; // agar dapat mengakses menu
             while (menuActiveStatus) {
                 System.out.println("\n=== Menu Peminjaman Buku ===");
                 System.out.println("Silahkan pilih buku yang ingin anda pinjam terlebih dahulu.");
