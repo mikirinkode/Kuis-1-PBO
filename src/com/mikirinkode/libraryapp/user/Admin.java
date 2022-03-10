@@ -15,6 +15,9 @@ public class Admin extends User {
         super(fullName, username, password, "Admin");
     }
 
+    /*
+        TODO: add update book method in library class
+     */
     public void updateBookProperties(Book book, String title, String category, String authorName, int releaseDate) {
         book.updateDetail(title, category, authorName, releaseDate);
         System.out.println("Buku " + title + " berhasil diperbaharui");

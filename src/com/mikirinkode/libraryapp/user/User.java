@@ -15,18 +15,18 @@ class User {
         this.userType = userType;
 
         // pembuatan ID dilakukan secara otomatis di dalam kelas ini ketika objek dibuat
-        this.userId = "" + idCounter;
-        idCounter++;
+        this.userId = createId();
     }
 
     void printUserDetail() {
-        System.out.println("User ID: " + userId);
-        System.out.println("Full Name: " + fullName);
-        System.out.println("Username: " + username);
+        System.out.println("User ID: " + getUserId());
+        System.out.println("Full Name: " + getFullName());
+        System.out.println("Username: " + getUsername());
+        System.out.println("Tipe: " + getUserType());
     }
 
     private static String createId() {
-        return String.valueOf(idCounter++);
+        return "UID00" + idCounter++;
     }
 
     /*
@@ -37,11 +37,11 @@ class User {
         return userId;
     }
 
-    String getFullName() {
+    public String getFullName() {
         return this.fullName;
     }
 
-    void setFullName(String name) {
+    public void setFullName(String name) {
         this.fullName = name;
     }
 

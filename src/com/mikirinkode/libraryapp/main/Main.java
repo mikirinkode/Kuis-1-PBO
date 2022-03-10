@@ -15,7 +15,5 @@ public class Main {
 
         // menu untuk login atau signup
         LoginManager.menu(library);
-    }
-
-
+      }
 }
