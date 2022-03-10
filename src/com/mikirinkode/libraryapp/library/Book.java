@@ -1,14 +1,13 @@
 package com.mikirinkode.libraryapp.library;
 
 
-
 public class Book {
+    private static long idCounter = 1;
     private final String bookId;
     private String bookTitle;
     private String bookCategory;
     private String authorName;
     private int releaseDate;
-    private static long idCounter = 0;
 
     public Book(String bookTitle, String bookCategory, String authorName, int releaseDate) {
         this.bookTitle = bookTitle;
@@ -18,7 +17,11 @@ public class Book {
         this.bookId = "0" + createId();
     }
 
-    public void updateDetail(String bookTitle, String bookCategory, String authorName, int releaseDate){
+    private static String createId() {
+        return String.valueOf(idCounter++);
+    }
+
+    public void updateDetail(String bookTitle, String bookCategory, String authorName, int releaseDate) {
         this.bookTitle = bookTitle;
         this.bookCategory = bookCategory;
         this.authorName = authorName;
@@ -26,15 +29,11 @@ public class Book {
     }
 
     void printBookDetail() {
-        System.out.println("ID Buku \t\t: " + bookId);
-        System.out.println("Nama Buku \t\t: " + bookTitle);
-        System.out.println("Kategori Buku \t: " + bookCategory);
-        System.out.println("Nama Penulis \t: " + authorName);
-        System.out.println("Tanggal Rilis \t: " + releaseDate);
-    }
-
-    private static String createId(){
-        return String.valueOf(idCounter++);
+        System.out.println("ID \t\t\t: " + getBookId());
+        System.out.println("Judul \t\t: " + getBookTitle());
+        System.out.println("Kategori \t: " + getBookCategory());
+        System.out.println("Penulis \t: " + getAuthorName());
+        System.out.println("Rilis \t\t: " + getReleaseDate());
     }
 
     /*
