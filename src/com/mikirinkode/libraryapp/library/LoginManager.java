@@ -88,10 +88,10 @@ public final class LoginManager {
         String fullname = input.nextLine();
 
         System.out.print("Username: ");
-        String username = input.next();
+        String username = input.nextLine();
 
         System.out.print("Password: ");
-        String password = input.next();
+        String password = input.nextLine();
 
         // menambahkan member baru
         LibraryMember newUser = new LibraryMember(fullname, username, password);
