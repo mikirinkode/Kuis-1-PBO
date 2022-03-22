@@ -20,6 +20,7 @@ NPM: 2015061057
 - Login Manager: untuk login, signup dan logout
 - Fitur admin: tambah buku, update data buku, lihat transaksi yang dilakukan anggota perpustakaan
 - Fitur anggota: meminjam buku, mengembalikan buku, lihat riwayat peminjaman, lihat daftar buku baik keseluruhan / berdasarkan abjad
+- Antisipasi kesalahan input dari user pada beberapa bagian seperti saat login, saat memilih menu dan saat memilih buku
 
 <br>
 
