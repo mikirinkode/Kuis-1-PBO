@@ -6,6 +6,21 @@ Nama: Muhammad Wafa
 <br>
 NPM: 2015061057
 
+## Table of Contents 
+- [Fitur Program](#fitur-program)
+- [Alur Program](#alur-program)
+  * [Sebagai user Admin](#sebagai-user-admin)
+  * [Sebagai user Anggota Perpustakaan](#sebagai-user-anggota-perpustakaan)
+- [Penjelasan singkat kode](#penjelasan-singkat-kode)
+
+<br>
+
+## Fitur Program
+- 2 user: Admin, Anggota Perpustakaan
+- Login Manager: untuk login, signup dan logout
+- Fitur admin: tambah buku, update data buku, lihat transaksi yang dilakukan anggota perpustakaan
+- Fitur anggota: meminjam buku, mengembalikan buku, lihat riwayat peminjaman, lihat daftar buku baik keseluruhan / berdasarkan abjad
+
 <br>
 
 ## Alur Program
@@ -14,7 +29,7 @@ Note:
 - Sample Anggota: username = wafa01, password = 12345678 
 
 
-#### Sebagai user Admin 🛡️
+### Sebagai user Admin
 1. login, menginput input username dan password
 2. Untuk admin tidak bisa sign up, jika signup maka akan otomatis menjadi user kategori anggota perpustakaan
 3. Pada menu admin terdapat 5 pilihan yaitu:
@@ -34,7 +49,7 @@ Note:
 9. Logout untuk keluar dari menu admin dan kembali ke menu Login / Signup
 
 
-#### Sebagai user Anggota Perpustakaan 👨‍🎓
+### Sebagai user Anggota Perpustakaan
 1. login, menginput input username dan password
 2. Signup jika tidak punya akun, kemudian login kembali
 3. Pada menu Anggota Perpustakaan terdapat 5 pilihan yaitu
