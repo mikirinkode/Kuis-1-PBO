@@ -50,9 +50,9 @@ public final class LoginManager {
         boolean loginSuccess = false;
         System.out.println("\nSilahkan login terlebih dahulu.");
         System.out.print("Username: ");
-        String username = input.next();
+        String username = input.nextLine();
         System.out.print("Password: ");
-        String password = input.next();
+        String password = input.nextLine();
 
         // validasi login
         for (Admin admin : library.getAdminList()) {
