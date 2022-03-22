@@ -14,14 +14,44 @@ Note:
 - Sample Anggota: username = wafa01, password = 12345678 
 
 
-#### Sebagai user Admin
+#### Sebagai user Admin 🛡️
 1. login, menginput input username dan password
 2. Untuk admin tidak bisa sign up, jika signup maka akan otomatis menjadi user kategori anggota perpustakaan
+3. Pada menu admin terdapat 5 pilihan yaitu:
+    - Tambah Buku
+    - Update Informasi Buku
+    - Tampilkan Daftar Buku
+    - Tampilkan Daftar Transaksi
+    - Logout 
+5. Jika memilih 1 (Tambah Buku) maka admin akan menginput data buku baru, mulai dari judul, kategori, penulis dan Tahun Rilis
+6. Jika memilih 2 (Update Informasi Buku) maka 
+    - Admin perlu memilih terlebih dahulu buku yang ingin di update
+    - Buku dapat ditampilkan secara seluruh / berdasarkan abjad saja
+    - Setelah memilih, maka admin perlu menginput ulang data buku
+    - Jika tidak ingin merubah salah satu atribut buku, maka dapat menginput "-" (strip)
+7. Pilihan 3 untuk menampilkan seluruh daftar buku
+8. Pilihan 4 untuk menampilkan seluruh transaksi baik peminjaman / pengembalian yang dilakukan oleh user bertipe Anggota Perpustakaan
+9. Logout untuk keluar dari menu admin dan kembali ke menu Login / Signup
 
 
-#### Sebagai user Anggota Perpustakaan
+#### Sebagai user Anggota Perpustakaan 👨‍🎓
 1. login, menginput input username dan password
 2. Signup jika tidak punya akun, kemudian login kembali
+3. Pada menu Anggota Perpustakaan terdapat 5 pilihan yaitu
+    - Melihat daftar buku
+    - Meminjam Buku
+    - Mengembalikan Buku
+    - Melihat Riwayat Peminjaman
+    - Logout
+4. Pilihan 1 untuk menampilkan seluruh daftar buku
+5. Jika user memilih 2, maka akan diarahkan ke menu peminjaman
+    - Pertama user memilih buku
+    - Buku dapat ditampilkan secara seluruh / berdasarkan abjad saja
+    - Jika telah memilih dan telah meng-konfirmasi pilihan, maka user telah tercata meminjam buku
+    - User tidak dapat meminjam buku lagi, jika buku belum dikembalikan
+6. Pilihan 3 untuk mengembalikan buku
+7. Pilihan 4 untuk melihat riwayat buku yang pernah dipinjam
+8. Logout untuk keluar dari menu dan kembali ke menu login / signup
 
 <br>
 
