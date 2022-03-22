@@ -8,6 +8,23 @@ NPM: 2015061057
 
 <br>
 
+## Alur Program
+Note: 
+- Sample Admin: username = admin, password admin1234
+- Sample Anggota: username = wafa01, password = 12345678 
+
+
+#### Sebagai user Admin
+1. login, menginput input username dan password
+2. Untuk admin tidak bisa sign up, jika signup maka akan otomatis menjadi user kategori anggota perpustakaan
+
+
+#### Sebagai user Anggota Perpustakaan
+1. login, menginput input username dan password
+2. Signup jika tidak punya akun, kemudian login kembali
+
+<br>
+
 ## Penjelasan singkat kode 
 Pada projek java ini terdapat 9 Class yang dikelompokkan sesuai kegunaan dalam package berikut:
 
